@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes or No</title>
+    <style>
+        /* Global Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent page scroll */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8c8dc, #f3a8c9); /* Soft pink gradient */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;  /* Make sure the container adjusts to smaller screens */
+            max-width: 600px; /* Max width to ensure it doesn’t stretch too far on larger screens */
+        }
+
+        .header_text {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #e14d8d; /* Soft pink color */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .gif_container img {
+            width: 100%; /* Set the image width to 100% of the container's width */
+            max-width: 100%; /* Ensure the image does not exceed the container's width */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Buttons container */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap; /* Allow buttons to stack on smaller screens */
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.3em;
+            cursor: pointer;
+            border: none;
+            background-color: #f59fd3; /* Light pink */
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            min-width: 120px; /* Ensure buttons are wide enough to tap on mobile */
+        }
+
+        .btn:hover {
+            background-color: #f36c96; /* Darker pink on hover */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        #noButton {
+            position: relative;
+            background-color: #f99bc1; /* Soft pink for No button */
+        }
+
+        #yesButton {
+            background-color: #92e1b3; /* Soft mint for Yes button */
+        }
+
+        /* Responsive adjustments for small screens */
+        @media (max-width: 600px) {
+            .header_text {
+                font-size: 2em; /* Smaller text for small screens */
+            }
+
+            .gif_container img {
+                max-width: 90%; /* Adjust GIF size to fit smaller screens */
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1.2em;
+            }
+
+            .buttons {
+                gap: 20px; /* Reduce gap between buttons on small screens */
+                flex-direction: column; /* Stack buttons on smaller screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header_text">Are you free on Valentines?</h1>
+        <div class="gif_container">
+            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTR3ejQ0Mzh2dnh2YThmbXk5eXMyZzB3cDdyYjFobDlpcXJnOXBvOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c76IJLufpNwSULPk77/giphy.gif" alt="Cute illustration">
+        </div>
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Try again!",
+            "You can't catch me!",
+            "Oops, too slow!",
+            "Nice try, but not today!",
+            "Better luck next time!",
+            "Gotcha!",
+            "You almost had me!"
+        ];
+
+        function moveButton() {
+            const button = document.getElementById('noButton');
+            const buttonRect = button.getBoundingClientRect();
+
+            // Calculate the maximum possible X and Y positions for the button
+            const maxX = window.innerWidth - buttonRect.width - 20;  // 20px padding
+            const maxY = window.innerHeight - buttonRect.height - 20; // 20px padding
+
+            // Randomize X and Y positions within the screen bounds
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            // Set the button's new position, ensuring it stays inside the viewport
+            button.style.position = 'absolute'; // Make it movable
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+
+            // Show a random message to the user
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        }
+
+        function nextPage() {
+            // Redirect the user to the next page (Rick Roll)
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+    </script>
+</body>
+</html>
